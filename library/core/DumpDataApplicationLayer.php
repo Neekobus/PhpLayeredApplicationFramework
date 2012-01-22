@@ -11,7 +11,7 @@ class DumpDataApplicationLayer implements ApplicationLayerInterface {
 	}
 	
 	public function run(DataContainerInterface $applicationData){
-		fwrite($this->fileDescriptor, var_dump($applicationData, true));		
+		fwrite($this->fileDescriptor, print_r($applicationData, true));	
 	}
 }
 	

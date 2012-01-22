@@ -1,0 +1,42 @@
+DataContainerArrayAdapter Object
+(
+    [adaptedArray:protected] => Array
+        (
+            [request] => DataContainerArrayAdapter Object
+                (
+                    [adaptedArray:protected] => Array
+                        (
+                            [ctrl] => test
+                            [act] => show
+                        )
+
+                )
+
+            [session] => DataContainerArrayAdapter Object
+                (
+                    [adaptedArray:protected] => 
+                )
+
+            [vars] => DataContainerArrayAdapter Object
+                (
+                    [adaptedArray:protected] => Array
+                        (
+                            [message] => hello from the controller !
+                        )
+
+                )
+
+            [config] => DataContainerArrayAdapter Object
+                (
+                    [adaptedArray:protected] => Array
+                        (
+                            [controllerDispatcherPath] => ctrl
+                            [viewDispatcherPath] => view
+                            [application_name] => PLAF - Sample Application
+                        )
+
+                )
+
+        )
+
+)
