@@ -15,3 +15,13 @@ The framework is builded on 3 basics components :
 ## Installation
 
 You need PhpUnit to run the unit tests (located in library-tests/). Get it from [the official PhpUnit site](https://github.com/sebastianbergmann/phpunit).
+
+## TODO
+
+* Normal/Error flow handling : if an ApplicationLayerException is thrown, the chain has to switch in "error mode". Some layers can run in normal mode only, some in error mode only, and some in the two modes.
+* ApplicationLayers to do :
+    * XmlConfigBuilder : build the "config" dataContainer from a xml (or ini or whatever)
+    * CliRequestBuilder : populate the "request" dataContainer from the argc/argv parameters.
+    * ControllerDispatcher : check the value of "controller" and "action" in "request" and load the appropriate controller class. 
+    * TextViewDispatcher : as ControllerDispatcher, for the view class
+    * TwigViewDispatcher : use Twig for output
