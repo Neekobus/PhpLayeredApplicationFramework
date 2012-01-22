@@ -1,3 +1,0 @@
-Php Layered Application Framework is a very simple PHP framework.
-It's based on a main "chain of responsability" composed by all the "application layers".
-At the end of the chain, the http request will be parsed, the session checked, the controller called, and the view rendered.
