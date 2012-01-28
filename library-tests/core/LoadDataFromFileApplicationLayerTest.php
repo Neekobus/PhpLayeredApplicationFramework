@@ -11,7 +11,7 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 	protected $expectedDataContainer;
 	protected $createdFileName;
 	
-	protected function setUp(){
+	protected function createValidFile(){
 		$this->createdFileName = "unfichiertemporaire.php";
 		$this->expectedDataInFile = array(
 			"a" => "A",
@@ -25,12 +25,18 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 		);
 		
 		$this->expectedDataContainer = new DataContainerArrayAdapter($this->expectedDataInFile);
+		file_put_contents($this->createdFileName, '<?php $configuration=' . var_export($this->expectedDataInFile, 1) . ';');
+	}
+	
+	protected function createInvalidFile(){
+		$this->createdFileName = "unfichiertemporaire.php";
+		$this->expectedDataInFile = "I am not an array...";
 		
 		file_put_contents($this->createdFileName, '<?php $configuration=' . var_export($this->expectedDataInFile, 1) . ';');
 	}
 	
 	protected function tearDown(){
-		unlink($this->createdFileName);
+		@unlink($this->createdFileName);
 	}
 	
 	public function testLayerImplementInterface(){
@@ -39,6 +45,8 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testLayerLoadArrayFromTheFileIntoAsDataContainer(){
+		$this->createValidFile();
+		
 		$keyForDataContainer = "conf";
 		$varInFile = "configuration";
 		
@@ -50,7 +58,9 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->expectedDataContainer, $dataContainer->get($keyForDataContainer));	
 	}
 	
-	public function testLayerLoadArrayFromTheFileInexistantVar(){
+	public function testLayerFailToLoadArrayFromTheFileInexistantVar(){
+		$this->createValidFile();
+		
 		$keyForDataContainer = "conf";
 		$varInFile = "inexistantvar";
 		$expectedEmptyDataContainer = new DataContainerArrayAdapter();
@@ -58,12 +68,18 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 		$layer = new LoadDataFromFileApplicationLayer($keyForDataContainer, $this->createdFileName, $varInFile);
 		$dataContainer = new DataContainerArrayAdapter();
 		
-		$this->assertNull($dataContainer->get($keyForDataContainer));
-		$layer->run($dataContainer);
-		$this->assertEquals($expectedEmptyDataContainer, $dataContainer->get($keyForDataContainer));	
+		try{
+			$layer->run($dataContainer);
+			$this->fail("expected exception");			
+		} catch(ApplicationLayerException $e){
+			$this->assertSame($layer, $e->getLayer());
+		}
+			
 	}
 	
 	public function testLayerFailToLoadInexistantFile(){
+		$this->createValidFile();
+		
 		$keyForDataContainer = "conf";
 		$varInFile = "var";
 		
@@ -78,5 +94,22 @@ class LoadDataFromFileApplicationLayerTest extends PHPUnit_Framework_TestCase {
 		}
 
 
+	}
+	
+	public function testLayerThrowExceptionIfVarIsNotAnArray(){
+		$this->createInvalidFile();
+
+		$keyForDataContainer = "conf";
+		$varInFile = "configuration";
+		
+		$layer = new LoadDataFromFileApplicationLayer($keyForDataContainer, $this->createdFileName, $varInFile);
+		$dataContainer = new DataContainerArrayAdapter();
+		
+		try{
+			$layer->run($dataContainer);
+			$this->fail("expected exception");			
+		} catch(ApplicationLayerException $e){
+			$this->assertSame($layer, $e->getLayer());
+		}	
 	}
 }
