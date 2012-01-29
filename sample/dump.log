@@ -21,7 +21,13 @@ DataContainerArrayAdapter Object
                 (
                     [adaptedArray:protected] => Array
                         (
-                            [message] => hello from the controller !
+                            [title] => Sample Application
+                            [message] => Array
+                                (
+                                    [0] => hello from the controller !
+                                    [1] => hello from the 2nd controller !
+                                )
+
                         )
 
                 )
@@ -32,7 +38,7 @@ DataContainerArrayAdapter Object
                         (
                             [controllerDispatcherPath] => ctrl
                             [viewDispatcherPath] => view
-                            [application_name] => PLAF - Sample Application
+                            [application_name] => Sample Application
                         )
 
                 )

@@ -29,3 +29,4 @@ Any other URL will show you errors or exceptions.
     * CliRequestBuilder : populate the "request" dataContainer from the argc/argv parameters.
     * TwigViewDispatcher : use Twig for output
 * Naming conventions, package... clean directory structure. 
+* SimpleViewDispatcher : solution for "layout". Add some functions to help text and HTML output...

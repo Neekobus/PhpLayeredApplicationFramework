@@ -8,6 +8,7 @@ require_once("$lib/library/core/LoadDataFromFileApplicationLayer.php");
 require_once("$lib/library/core/ControllerDispatcherApplicationLayer.php");
 require_once("$lib/library/core/SimpleViewDispatcherApplicationLayer.php");
 require_once("$lib/library/core/DumpDataApplicationLayer.php");
+require_once("$lib/library/core/AbstractApplicationController.php");
 
 //The main datacontainer. He will contain others datacontainer, as the following layers will build them.
 $applicationData = new DataContainerArrayAdapter();

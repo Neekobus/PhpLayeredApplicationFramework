@@ -24,4 +24,8 @@ class MockDataContainer implements DataContainerInterface {
 	public function set($key, $value){
 		$this->dataArray[$key] = $value;
 	}
+	
+	public function append($key, $value){
+		$this->dataArray[$key][] = $value;
+	}
 }

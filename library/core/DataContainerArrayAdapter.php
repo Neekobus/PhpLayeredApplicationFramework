@@ -25,4 +25,12 @@ class DataContainerArrayAdapter implements DataContainerInterface {
 	public function set($key, $value){
 		$this->adaptedArray[$key] = $value;
 	}
+	
+	public function append($key, $value){
+		if (isset($this->adaptedArray[$key]) && ! is_array($this->adaptedArray[$key])) {
+			$this->adaptedArray[$key] = array($this->adaptedArray[$key]);
+		}
+		
+		$this->adaptedArray[$key][] = $value;
+	}
 }

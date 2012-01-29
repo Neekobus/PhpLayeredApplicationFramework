@@ -48,6 +48,55 @@ class DataContainerArrayAdapterTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertEquals($newValue, $this->array["key1"]);
 		$this->assertEquals($newValue, $adapter->get("key1"));
+	}
+	
+	public function testAdapterAppendValuesGetAnArray(){
+		
+		$adapter = new DataContainerArrayAdapter($this->array);
+		$adapter->append("key", 'one');
+		$adapter->append("key", 'two');
+		$adapter->append("key", 'three');
+		$adapter->append("key", 'four');
+		
+		$this->assertEquals(array('one', 'two', 'three', 'four'), $adapter->get("key"));
 		
 	}
+	
+	public function testAdapterAppendValuesSetOverwrite(){
+		
+		$adapter = new DataContainerArrayAdapter($this->array);
+		$adapter->append("key", 'one');
+		$adapter->append("key", 'two');
+		$adapter->append("key", 'three');
+		$adapter->append("key", 'four');
+		
+		$adapter->set("key", 'only me');
+		$this->assertEquals('only me', $adapter->get("key"));
+		
+	}
+	
+	public function testAdapterAppendValuesOverSettedArray(){
+		
+		$adapter = new DataContainerArrayAdapter($this->array);
+		
+		$adapter->set("key", array('zero', 'one'));
+
+		$adapter->append("key", 'two');
+		$adapter->append("key", 'three');
+		$adapter->append("key", 'four');
+		
+		$this->assertEquals(array('zero', 'one', 'two', 'three', 'four'), $adapter->get("key"));
+	}
+	
+	public function testAdapterAppendValuesOverNonArray(){
+		
+		$adapter = new DataContainerArrayAdapter($this->array);
+		
+		$adapter->set("key", 'not an array');
+		
+		$adapter->append("key", 'one');
+		$adapter->append("key", 'two');
+		
+		$this->assertEquals(array('not an array', 'one', 'two'), $adapter->get("key"));
+	} 
 }

@@ -6,9 +6,13 @@ require_once("ApplicationLayerException.php");
 class SimpleViewDispatcherApplicationLayer implements ApplicationLayerInterface {
 		
 	public function run(DataContainerInterface $applicationData){
+		$dataContainerKey = 'request';
+		$controllerKey = 'ctrl';
+		$actionKey = 'act';
+		
 		$basePath = $applicationData->get('config')->get('viewDispatcherPath', '.');
-		$controller = $applicationData->get('request')->get('ctrl');
-		$action = $applicationData->get('request')->get('act');
+		$controller = $applicationData->get($dataContainerKey)->get($controllerKey);
+		$action = $applicationData->get($dataContainerKey)->get($actionKey);
 		
 		if (empty($controller) || empty($action)) {
 			throw new ApplicationLayerException($this);
@@ -18,6 +22,12 @@ class SimpleViewDispatcherApplicationLayer implements ApplicationLayerInterface 
 		$data = $applicationData->get('vars'); 
 
 		$scriptName = ucfirst($controller) . ucfirst($action);		
-		require_once($basePath . '/' . ucfirst($controller) . '/' . $scriptName . '.php');
+		$fileName = $basePath . '/' . ucfirst($controller) . '/' . $scriptName . '.php';
+		
+		if (! file_exists($fileName)){
+			throw new ApplicationLayerException($this, "Cannot find view file : $fileName");
+		}
+		
+		require($fileName);
 	}
 }
