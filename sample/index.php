@@ -1,6 +1,8 @@
 <?php
 
 $lib = realpath(__DIR__ . '/..');
+define("ROOT_DIR", "$lib/library");
+
 require_once("$lib/library/core/DataContainerArrayAdapter.php");
 require_once("$lib/library/core/StandardWebInitializationApplicationLayer.php");
 require_once("$lib/library/core/CompositeApplicationLayer.php");

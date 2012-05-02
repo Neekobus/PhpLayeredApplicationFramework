@@ -13,6 +13,11 @@ class ArticleDaoFileSystem implements ArticleDaoInterface {
 	public function loadAll(ArticleList $list){		
 		$files = new FilesystemIterator($this->basePath);
 		foreach($files as $dir){
+			
+			if (substr($dir->getBasename(), 0, 1) == '.') {
+				continue;
+			}
+			
 			$article = $this->loadOne($dir . '/index.xhtml');
 
 			if ($article != null) {

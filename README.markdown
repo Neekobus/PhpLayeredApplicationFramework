@@ -30,3 +30,8 @@ Any other URL will show you errors or exceptions.
     * TwigViewDispatcher : use Twig for output
 * Naming conventions, package... clean directory structure. 
 * SimpleViewDispatcher : solution for "layout". Add some functions to help text and HTML output...
+
+## BASIC BLOG ENGINE / TODO
+
+* Service, configuration : default article
+
