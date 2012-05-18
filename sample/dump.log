@@ -6,8 +6,8 @@ DataContainerArrayAdapter Object
                 (
                     [adaptedArray:protected] => Array
                         (
-                            [ctrl] => test
-                            [act] => show
+                            [ctrl] => article
+                            [act] => list
                         )
 
                 )
@@ -21,11 +21,34 @@ DataContainerArrayAdapter Object
                 (
                     [adaptedArray:protected] => Array
                         (
-                            [title] => Sample Application
-                            [message] => Array
+                            [articles] => ArticleList Object
                                 (
-                                    [0] => hello from the controller !
-                                    [1] => hello from the 2nd controller !
+                                    [list:protected] => Array
+                                        (
+                                            [0] => Article Object
+                                                (
+                                                    [hash:protected] => article-de-test
+                                                    [title:protected] => Article de test
+                                                    [author:protected] => 
+                                                    [publicationDate:protected] => 
+                                                    [content:protected] => 
+                                                )
+
+                                        )
+
+                                    [articleByHash:protected] => Array
+                                        (
+                                            [article-de-test] => Article Object
+                                                (
+                                                    [hash:protected] => article-de-test
+                                                    [title:protected] => Article de test
+                                                    [author:protected] => 
+                                                    [publicationDate:protected] => 
+                                                    [content:protected] => 
+                                                )
+
+                                        )
+
                                 )
 
                         )

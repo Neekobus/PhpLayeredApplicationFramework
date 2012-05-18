@@ -31,7 +31,7 @@ class ControllerDispatcherApplicationLayer implements ApplicationLayerInterface,
 			throw new ApplicationLayerException($this, "You cannot build a controller instance outside an application run.");
 		}
 		
-		$className = ucfirst($controller) . ucfirst($action);
+		$className = ucfirst($controller) . ucfirst($action) . "Controller";
 		$fileName = $this->basePath . '/' . ucfirst($controller) . '/' . $className . '.php';		
 		
 		if (! file_exists($fileName)){

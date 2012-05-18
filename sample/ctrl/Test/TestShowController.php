@@ -1,6 +1,6 @@
 <?php 
 
-class TestShow extends AbstractApplicationController implements ApplicationLayerInterface {
+class TestShowController extends AbstractApplicationController implements ApplicationLayerInterface {
 
 	public function run(DataContainerInterface $applicationData){
 		$applicationData->get('vars')->set('title', $applicationData->get('config')->get('application_name'));
