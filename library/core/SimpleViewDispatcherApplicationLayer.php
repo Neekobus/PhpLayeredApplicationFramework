@@ -28,6 +28,16 @@ class SimpleViewDispatcherApplicationLayer implements ApplicationLayerInterface 
 			throw new ApplicationLayerException($this, "Cannot find view file : $fileName");
 		}
 		
+		ob_start();
+		require($fileName);
+		$content = ob_get_clean();
+
+		$fileName = $basePath . '/layout.php';
+		
+		if (! file_exists($fileName)){
+			throw new ApplicationLayerException($this, "Cannot find layout file : $fileName");
+		}
+
 		require($fileName);
 	}
 }
