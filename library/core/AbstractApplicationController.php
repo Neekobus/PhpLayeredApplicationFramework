@@ -19,4 +19,8 @@ abstract class AbstractApplicationController {
 	public function callController($controllerName, $controllerAction){
 		$this->dispatcher->getControllerInstance($controllerName, $controllerAction)->run($this->applicationData);
 	}
+
+	public function redirectToUrl($url){
+		header("Location: $url");
+	}
 }
